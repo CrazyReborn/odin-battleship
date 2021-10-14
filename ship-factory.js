@@ -12,8 +12,8 @@ const Ship = (shipLength) => {
     const hit = (spot) => hitSpots[spot] = 'hit';
    
     const isSunk = () => {
-        const a = spot => spot === 'hit';
-        return hitSpots.every(a)
+        const allSpotsHit = spot => spot === 'hit';
+        return hitSpots.every(allSpotsHit);
     }
 
     return {
