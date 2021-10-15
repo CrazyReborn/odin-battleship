@@ -15,9 +15,9 @@ const Gameboard = () => {
     const place = (length, coordA, coordB) => {
         if (arrangement == 'horizontal') {
             const newShip = Ship(length);
-        const locationsH = [];
-        const locationsV = [];
-        const fillCoorditanes = (() => {
+            const locationsH = [];
+            const locationsV = [];
+            const fillCoorditanes = (() => {
             for(let i = 0;i < newShip.length; i++) {
                 locationsH.push(coordA+i);
             }
@@ -30,9 +30,9 @@ const Gameboard = () => {
         }
         else if (arrangement == 'vertical') {
             const newShip = Ship(length);
-        const locationsH = [];
-        const locationsV = [];
-        const fillCoorditanes = (() => {
+            const locationsH = [];
+            const locationsV = [];
+            const fillCoorditanes = (() => {
             locationsH.push(coordA);
             for(let i = 0;i < newShip.length; i++) {
                 locationsV.push(coordB+i);
@@ -46,11 +46,25 @@ const Gameboard = () => {
         
     }
 
+    const receiveAttack = (coordX, coordY) => {
+        let x;
+        let y;
+        let foundShip;
+        let hitLocation;
+
+        //go over ships and check locationH and locationV for matches
+        foundShip = ships.find(ship =>
+           ship.locationsH.includes(coordX) && ship.locationsV.includes(coordY)
+        )
+        return foundShip;
+    }
+
     return {
         ships,
         place,
         change,
-        arrangement
+        arrangement,
+        receiveAttack
     }
 }
 
