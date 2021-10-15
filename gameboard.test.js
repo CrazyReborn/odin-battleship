@@ -45,3 +45,11 @@ test('after receiving all hit marks are hit isSunk of the hit ship sould be true
     expect(Gameboard2.missed).toStrictEqual([[9, 9]])
 })
 */
+
+test('after receiving all hit marks are hit isSunk of the hit ship sould be true', () => {
+    Gameboard2.place(1,3,3),
+    Gameboard2.place(1,2,2),
+    Gameboard2.receiveAttack(3,3),
+    Gameboard2.receiveAttack(2,2),
+    expect(Gameboard2.allSunk()).toBe(true)
+})

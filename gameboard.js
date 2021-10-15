@@ -77,13 +77,22 @@ const Gameboard = () => {
         }
     }
 
+    const allSunk = () => {
+        const allShipSunk = (ship) => ship.isSunk();
+        if (ships.every(ship => allShipSunk)) {
+            return true;
+        }
+    }
+
+
     return {
         ships,
         place,
         change,
         arrangement,
         receiveAttack,
-        missed
+        missed,
+        allSunk
     }
 }
 
