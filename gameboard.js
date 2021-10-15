@@ -2,7 +2,8 @@ const Ship = require("./ship-factory");
 
 const Gameboard = () => {
     const ships = [];
-    let arrangement = 'horizontal'
+    let arrangement = 'horizontal';
+    const missed = [];
 
     const change = () => {
         if (arrangement != 'vertical') {
@@ -57,6 +58,13 @@ const Gameboard = () => {
            ship.locationsH.includes(coordX) && ship.locationsV.includes(coordY)
         )
 
+        //if not found then push ccords to missed
+
+        if (foundShip == undefined) {
+            missed.push([coordX, coordY]);
+            return;
+        }
+
         //if the length of locationsV ==1 then we should findIndex of coordX on the locationsH and then pass the index to hit()
         //otherwise use coordY for the same stuff.
         if (foundShip.locationsV.length == 1) {
@@ -74,7 +82,8 @@ const Gameboard = () => {
         place,
         change,
         arrangement,
-        receiveAttack
+        receiveAttack,
+        missed
     }
 }
 

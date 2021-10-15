@@ -27,7 +27,7 @@ test('recieve attack and register a hit on a corrent ship in a correct spot', ()
     expect(Gameboard2.ships).toBe(12)
 })
 */
-
+/*WORKS!!!!
 test('after receiving all hit marks are hit isSunk of the hit ship sould be true', () => {
     Gameboard2.place(4,6,2),
     Gameboard2.place(2,2,2),
@@ -35,3 +35,13 @@ test('after receiving all hit marks are hit isSunk of the hit ship sould be true
     Gameboard2.receiveAttack(2,2),
     expect(Gameboard2.ships[1].newShip.isSunk()).toBe(true)
 })
+*/
+
+/* WORKS!
+test('after receiving all hit marks are hit isSunk of the hit ship sould be true', () => {
+    Gameboard2.place(4,6,2),
+    Gameboard2.receiveAttack(9,9),
+   //Gameboard2.receiveAttack(2,2),
+    expect(Gameboard2.missed).toStrictEqual([[9, 9]])
+})
+*/
