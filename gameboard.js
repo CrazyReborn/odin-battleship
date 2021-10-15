@@ -56,7 +56,17 @@ const Gameboard = () => {
         foundShip = ships.find(ship =>
            ship.locationsH.includes(coordX) && ship.locationsV.includes(coordY)
         )
-        return foundShip;
+
+        //if the length of locationsV ==1 then we should findIndex of coordX on the locationsH and then pass the index to hit()
+        //otherwise use coordY for the same stuff.
+        if (foundShip.locationsV.length == 1) {
+            hitLocation = foundShip.locationsH.findIndex(coord => coord == coordX);
+            foundShip.newShip.hit(hitLocation);
+        }
+        else {
+            hitLocation = foundShip.locationsV.findIndex(coord => coord == coordY);
+            foundShip.newShip.hit(hitLocation);
+        }
     }
 
     return {
