@@ -3,6 +3,7 @@ const Ship = require("./ship-factory");
 const Gameboard = () => {
     const ships = [];
     let arrangement = 'horizontal';
+    const shot = [];
     const missed = [];
     let occupiedX = [];
     let occupiedY = [];
@@ -42,8 +43,7 @@ const Gameboard = () => {
                 locationsV,
                 newShip});
         }
-        
-        }
+    }
         else if (arrangement == 'vertical') {
             const newShip = Ship(length);
             const locationsH = [];
@@ -54,12 +54,18 @@ const Gameboard = () => {
                 locationsV.push(coordB+i);
             }
         })();
+        if (checkCollision(locationsH, occupiedX) && checkCollision(locationsV, occupiedY)) {
+            return;
+        } else {
+            locationsH.forEach(coord => occupiedX.push(coord));
+            locationsV.forEach(coord => occupiedY.push(coord));
         ships.push({
             locationsH,
             locationsV,
             newShip});
         }
     }
+}
 
     const receiveAttack = (coordX, coordY) => {
         let x;
@@ -72,10 +78,11 @@ const Gameboard = () => {
            ship.locationsH.includes(coordX) && ship.locationsV.includes(coordY)
         )
 
-        //if not found then push ccords to missed
+        //if not found then push ccords to evaded
 
         if (foundShip == undefined) {
             missed.push([coordX, coordY]);
+            shot.push([coordX, coordY]);
             return;
         }
 
@@ -84,10 +91,12 @@ const Gameboard = () => {
         if (foundShip.locationsV.length == 1) {
             hitLocation = foundShip.locationsH.findIndex(coord => coord == coordX);
             foundShip.newShip.hit(hitLocation);
+            missed.push([coordX, coordY]);
         }
         else {
             hitLocation = foundShip.locationsV.findIndex(coord => coord == coordY);
             foundShip.newShip.hit(hitLocation);
+            missed.push([coordX, coordY]);
         }
     }
 
@@ -98,16 +107,16 @@ const Gameboard = () => {
         }
     }
 
-
     return {
         place,
         change,
         receiveAttack,
         allSunk,
+        shot,
         missed,
         ships, 
         arrangement
     }
 }
 
-module.exports = Gameboard;
+module.exports = Gameboard
