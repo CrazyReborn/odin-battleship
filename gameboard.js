@@ -4,6 +4,14 @@ const Gameboard = () => {
     const ships = [];
     let arrangement = 'horizontal';
     const missed = [];
+    let occupiedX = [];
+    let occupiedY = [];
+
+
+    const checkCollision = (coords, occupied) => {
+        const alreadyOccupied = (element) => occupied.includes(element);
+        return coords.every(alreadyOccupied)
+    }
 
     const change = () => {
         if (arrangement != 'vertical') {
@@ -24,10 +32,17 @@ const Gameboard = () => {
             }
             locationsV.push(coordB);
         })();
-        ships.push({
-            locationsH,
-            locationsV,
-            newShip});
+        if (checkCollision(locationsH, occupiedX) && checkCollision(locationsV, occupiedY)) {
+            return;
+        } else {
+            locationsH.forEach(coord => occupiedX.push(coord));
+            locationsV.forEach(coord => occupiedY.push(coord));
+            ships.push({
+                locationsH,
+                locationsV,
+                newShip});
+        }
+        
         }
         else if (arrangement == 'vertical') {
             const newShip = Ship(length);
@@ -44,7 +59,6 @@ const Gameboard = () => {
             locationsV,
             newShip});
         }
-        
     }
 
     const receiveAttack = (coordX, coordY) => {
@@ -86,13 +100,13 @@ const Gameboard = () => {
 
 
     return {
-        ships,
         place,
         change,
-        arrangement,
         receiveAttack,
+        allSunk,
         missed,
-        allSunk
+        ships, 
+        arrangement
     }
 }
 
