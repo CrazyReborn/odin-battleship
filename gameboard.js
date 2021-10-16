@@ -83,7 +83,7 @@ const Gameboard = () => {
         if (foundShip == undefined) {
             missed.push([coordX, coordY]);
             shot.push([coordX, coordY]);
-            return;
+            return 'miss';
         }
 
         //if the length of locationsV ==1 then we should findIndex of coordX on the locationsH and then pass the index to hit()
@@ -92,11 +92,13 @@ const Gameboard = () => {
             hitLocation = foundShip.locationsH.findIndex(coord => coord == coordX);
             foundShip.newShip.hit(hitLocation);
             missed.push([coordX, coordY]);
+            return 'hit';
         }
         else {
             hitLocation = foundShip.locationsV.findIndex(coord => coord == coordY);
             foundShip.newShip.hit(hitLocation);
             missed.push([coordX, coordY]);
+            return 'hit';
         }
     }
 
