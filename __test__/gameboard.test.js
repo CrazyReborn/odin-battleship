@@ -1,4 +1,4 @@
-const createnew = require('./gameboard');
+const createnew = require('../gameboard');
 const Gameboard = createnew();
 
 /*
@@ -45,7 +45,7 @@ test('after receiving all hit marks are hit isSunk of the hit ship sould be true
     expect(Gameboard2.missed).toStrictEqual([[9, 9]])
 })
 */
-
+/* WORKS
 test('after receiving all hit marks are hit isSunk of the hit ship sould be true', () => {
     Gameboard2.place(1,3,3),
     Gameboard2.place(1,2,2),
@@ -53,3 +53,11 @@ test('after receiving all hit marks are hit isSunk of the hit ship sould be true
     Gameboard2.receiveAttack(2,2),
     expect(Gameboard2.allSunk()).toBe(true)
 })
+*/
+/*WORKS
+test('should not be able to place 2 ships on the same spot', () => {
+    Gameboard2.place(1,2,2),
+    Gameboard2.place(1,2,2),
+    expect(Gameboard2.ships).toBe(1)
+})
+*/
