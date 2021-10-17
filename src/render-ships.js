@@ -1,7 +1,6 @@
 function renderShips (player) {
     const allPlayerCells = Array.from(document.querySelectorAll('.player-board > .cell'));
     const playerShips = player.gameboard.ships;
-    console.log(allPlayerCells);
 
     playerShips.forEach(element => {
         const foundX = element.locationsH;
