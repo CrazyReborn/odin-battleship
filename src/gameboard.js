@@ -1,4 +1,5 @@
 import { Ship } from './ship-factory';
+//const Ship = require('./ship-factory')
 
 const Gameboard = () => {
     const ships = [];
@@ -74,9 +75,8 @@ const Gameboard = () => {
         let hitLocation;
 
         //go over ships and check locationH and locationV for matches
-        foundShip = ships.find(ship =>
-           ship.locationsH.includes(coordX) && ship.locationsV.includes(coordY)
-        )
+        const findShip = (ship) => ship.locationsH.includes(coordX) && ship.locationsV.includes(coordY); 
+        foundShip = ships.find(findShip);
 
         //if not found then push ccords to evaded
 
@@ -88,7 +88,7 @@ const Gameboard = () => {
 
         //if the length of locationsV ==1 then we should findIndex of coordX on the locationsH and then pass the index to hit()
         //otherwise use coordY for the same stuff.
-        if (foundShip.locationsV.length == 1) {
+        else if (foundShip.locationsV.length == 1) {
             hitLocation = foundShip.locationsH.findIndex(coord => coord == coordX);
             foundShip.newShip.hit(hitLocation);
             missed.push([coordX, coordY]);
@@ -103,8 +103,11 @@ const Gameboard = () => {
     }
 
     const allSunk = () => {
-        const allShipSunk = (ship) => ship.isSunk();
-        if (ships.every(ship => allShipSunk)) {
+        const allShipSunk = (ship) => ship.newShip.isSunk();
+        if (!ships.every(allShipSunk)) {
+            return false;
+        }
+        else {
             return true;
         }
     }
@@ -122,3 +125,4 @@ const Gameboard = () => {
 }
 
 export { Gameboard }
+//module.exports = Gameboard;

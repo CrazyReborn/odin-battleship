@@ -9,7 +9,10 @@ const Ship = (shipLength) => {
         }
     })();
 
-    const hit = (spot) => hitSpots[spot] = 'hit';
+    const hit = (spot) => {
+        hitSpots[spot] = 'hit';
+        isSunk();
+    }
    
     const isSunk = () => {
         const allSpotsHit = spot => spot === 'hit';
@@ -24,5 +27,5 @@ const Ship = (shipLength) => {
     }
 }
 
-
 export { Ship }
+//module.exports = Ship;  
