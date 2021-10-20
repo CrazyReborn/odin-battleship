@@ -16,16 +16,18 @@ const computer = () => {
         const result = enemy.gameboard.receiveAttack(hitX, hitY);
         const hits = [result, hitX, hitY];
         return hits;
-        
     }
 
     const randomisePlacement = () => {
-        let x;
-        let y;
-        do{
+        let x = Math.floor(Math.random() * 10);
+        let y = Math.floor(Math.random() * 10);
+        //let find = (ship) => ship.occupied.includes(x) && ship.locationsV.includes(y);
+        
+        while (gameboard.occupiedX.includes(x) && gameboard.occupiedY.includes(y)) {
             x = Math.floor(Math.random() * 10);
             y = Math.floor(Math.random() * 10);
-        } while (gameboard.ships.some((ship) => ship.locationsH.includes(x) && ship.locationsV.includes(y)));
+        }
+        console.log(gameboard.ships.some((ship) => ship.locationsH.includes(x) && ship.locationsV.includes(y)));
         return [x, y]
     }
 
