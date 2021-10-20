@@ -30,13 +30,22 @@ const computer = () => {
         return [x, y]
     }
 
-    const placeSmallShips = () => {
+    const placeVerySmallShips = () => {
         let i = 0;
         do {
             const coords = randomisePlacement();
             gameboard.place(1, coords[0], coords[1]);
             i++; 
         } while(i<4)
+    }
+
+    const placeSmallShips = () => {
+        let i = 0;
+        do {
+            const coords = randomisePlacement();
+            gameboard.place(2, coords[0], coords[1]);
+            i++; 
+        } while(i<3)
     }
 
     const placeMediumShips = () => {
@@ -52,6 +61,7 @@ const computer = () => {
         turn,
         gameboard,
         randomisePlacement,
+        placeVerySmallShips
         placeSmallShips,
         placeMediumShips
     }
