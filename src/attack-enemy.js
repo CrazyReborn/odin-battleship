@@ -1,5 +1,11 @@
 
 const attackComputer = (you, computer) => {
+    if ((computer.gameboard.allSunk() || you.gameboard.allSunk())) {
+        console.log('done!');
+        allComputerDivs.forEach(div => {
+            div.removeEventListener('click', attack);
+        })
+    }
     const allComputerDivs = document.querySelectorAll('.computer-board > .cell');
     allComputerDivs.forEach(div => {
         div.addEventListener('click', attack);
@@ -10,13 +16,11 @@ const attackComputer = (you, computer) => {
             const result = you.turn(computer, x, y);
             if (result == 'hit') {
                 event.target.classList.add('hit');
-            } else {
+            } else if (result == 'miss') {
                 event.target.classList.add('miss');
-            }
-            if (result == 'miss') {
                 attackPlayer(computer, you);
             }
-            else if (result == 'hit' && (computer.gameboard.allSunk() || you.gameboard.allSunk())) {
+            if (computer.gameboard.allSunk() || you.gameboard.allSunk()) {
                 console.log('done!');
                 allComputerDivs.forEach(div => {
                     div.removeEventListener('click', attack);
