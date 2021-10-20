@@ -52,18 +52,28 @@ const computer = () => {
         let i = 0;
         do {
             const coords = randomisePlacement();
-            gameboard.place(2, coords[0], coords[1]);
+            gameboard.place(3, coords[0], coords[1]);
             i++; 
-        } while(i<3)
+        } while(i<2)
+    }
+
+    const placeLargeShips = () => {
+        let i = 0;
+        do {
+            const coords = randomisePlacement();
+            gameboard.place(4, coords[0], coords[1]);
+            i++; 
+        } while(i<1)
     }
 
     return {
         turn,
         gameboard,
         randomisePlacement,
-        placeVerySmallShips
+        placeVerySmallShips,
         placeSmallShips,
-        placeMediumShips
+        placeMediumShips,
+        placeLargeShips
     }
 }
 
