@@ -27,7 +27,6 @@ const computer = () => {
             x = Math.floor(Math.random() * 10);
             y = Math.floor(Math.random() * 10);
         }
-        console.log(gameboard.ships.some((ship) => ship.locationsH.includes(x) && ship.locationsV.includes(y)));
         return [x, y]
     }
 
@@ -38,14 +37,23 @@ const computer = () => {
             gameboard.place(1, coords[0], coords[1]);
             i++; 
         } while(i<4)
+    }
 
+    const placeMediumShips = () => {
+        let i = 0;
+        do {
+            const coords = randomisePlacement();
+            gameboard.place(2, coords[0], coords[1]);
+            i++; 
+        } while(i<3)
     }
 
     return {
         turn,
         gameboard,
         randomisePlacement,
-        placeSmallShips
+        placeSmallShips,
+        placeMediumShips
     }
 }
 
