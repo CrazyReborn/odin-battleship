@@ -18,23 +18,14 @@ const computer = () => {
         return hits;
     }
 
-    const randomisePlacement = () => {
-        let x = Math.floor(Math.random() * 10);
-        let y = Math.floor(Math.random() * 10);
-        //let find = (ship) => ship.occupied.includes(x) && ship.locationsV.includes(y);
-        
-        while (gameboard.occupiedX.includes(x) && gameboard.occupiedY.includes(y)) {
-            x = Math.floor(Math.random() * 10);
-            y = Math.floor(Math.random() * 10);
-        }
-        return [x, y]
-    }
 
     const placeVerySmallShips = () => {
         let i = 0;
         do {
-            const coords = randomisePlacement();
-            gameboard.place(1, coords[0], coords[1]);
+            let x = Math.floor(Math.random() * 10);
+            let y = Math.floor(Math.random() * 10);
+            let result = gameboard.place(1, x, y);
+            if (result == 'failed') continue;
             i++; 
         } while(i<4)
     }
@@ -42,8 +33,13 @@ const computer = () => {
     const placeSmallShips = () => {
         let i = 0;
         do {
-            const coords = randomisePlacement();
-            gameboard.place(2, coords[0], coords[1]);
+            let x = Math.floor(Math.random() * 10);
+            let y = Math.floor(Math.random() * 10);
+            let result = gameboard.place(2, x, y);
+            if (result == 'failed') {
+                gameboard.change();
+                continue
+            };
             i++; 
         } while(i<3)
     }
@@ -51,8 +47,10 @@ const computer = () => {
     const placeMediumShips = () => {
         let i = 0;
         do {
-            const coords = randomisePlacement();
-            gameboard.place(3, coords[0], coords[1]);
+            let x = Math.floor(Math.random() * 10);
+            let y = Math.floor(Math.random() * 10);
+            let result = gameboard.place(3, x, y);
+            if (result == 'failed') continue;
             i++; 
         } while(i<2)
     }
@@ -60,16 +58,19 @@ const computer = () => {
     const placeLargeShips = () => {
         let i = 0;
         do {
-            const coords = randomisePlacement();
-            gameboard.place(4, coords[0], coords[1]);
-            i++; 
-        } while(i<1)
+            let x = Math.floor(Math.random() * 10);
+            let y = Math.floor(Math.random() * 10);
+            let result = gameboard.place(4, x, y);
+            if (result == 'failed') {
+                gameboard.change();
+                continue};
+            i++;
+        } while(i!=1)
     }
 
     return {
         turn,
         gameboard,
-        randomisePlacement,
         placeVerySmallShips,
         placeSmallShips,
         placeMediumShips,

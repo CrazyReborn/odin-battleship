@@ -10,20 +10,21 @@ const Gameboard = () => {
 
 
     const checkCollision = (coordsH, coordsV) => {
-        if (coordsH.length > coordsV.length) {
-            const matches = (x) => (x[0] == coordsH[0] && x[1] == coordsV[0]) || (x[0] == coordsH[-1] && x[1] == coordsV[0]);
+        //if (coordsH.length > coordsV.length) {
+            //const matches = (x) => (x[0] == coordsH[0] && x[1] == coordsV[0]) || (x[0] == coordsH[coordsH.length-1] && x[1] == coordsV[0]);
+            const matches = (x) => coordsH.includes(x[0]) && coordsV.includes(x[1]);
             return occupied.some(matches);
         }
-        if (coordsH.length < coordsV.length) {
-            const matches = (x) => (x[0] == coordsH[0] && x[1] == coordsV[0]) || (x[0] == coordsH[0] && x[1] == coordsV[-1]);
-            return occupied.some(matches);
-        }
-        if (coordsH.length = coordsV.length) {
-            const matches = (x) => (x[0] == coordsH[0] && x[1] == coordsV[0]);
-            return occupied.some(matches);
-        }
+    //     if (coordsH.length < coordsV.length) {
+    //         const matches = (x) => (x[0] == coordsH[0] && x[1] == coordsV[0]) || (x[0] == coordsH[0] && x[1] == coordsV[coordsV.length-1]);
+    //         return occupied.some(matches);
+    //     }
+    //     if (coordsH.length == coordsV.length) {
+    //         const matches = (x) => (x[0] == coordsH[0] && x[1] == coordsV[0]);
+    //         return occupied.some(matches);
+    //     }
 
-    }
+    // }
 
     function change() {
         if (arrangement != 'vertical') {
@@ -46,6 +47,9 @@ const Gameboard = () => {
             })();
             if (checkCollision(locationsH, locationsV)) {
                 return 'failed';
+            }
+            else if (coordA + length > 9) {
+                return 'failed';
             } else {
                 ships.push({
                     locationsH,
@@ -58,15 +62,11 @@ const Gameboard = () => {
                 locationsH.forEach(x => {
                     occupied.push([x, locationsV[0]]);
                 })
-                ///the ship and horiznotal; y == y - 1;
-                occupied.push([coordA - 1, coordB - 1]);
-                occupied.push([coordA + length, coordB - 1])
+                ///the ship ; y == y - 1;
                 locationsH.forEach(x => {
                     occupied.push([x, locationsV[0] - 1]);
                 })
-                ///the ship and horizontal offset; y == y + 1
-                occupied.push([coordA - 1, coordB + 1]);
-                occupied.push([coordA + length, coordB + 1])
+                ///the ship; y == y + 1 
                 locationsH.forEach(x => {
                     occupied.push([x, locationsV[0] + 1]);
                 })
@@ -85,6 +85,9 @@ const Gameboard = () => {
             })();
             if (checkCollision(locationsH, locationsV)) {
                 return 'failed';
+            }
+            else if (coordB + length > 9) {
+                return 'failed';
             } else {
                 ships.push({
                     locationsH,
@@ -98,14 +101,10 @@ const Gameboard = () => {
                     occupied.push([locationsH[0], y]);
                 })
                 ///x == x -1
-                occupied.push([coordA - 1, coordB - 1]);
-                occupied.push([coordA - 1, coordB + length]);
                 locationsV.forEach(y => {
                     occupied.push([locationsH[0] - 1, y]);
                 })
                 ///x == x + 1
-                occupied.push([coordA + 1, coordB - 1]);
-                occupied.push([coordA + 1, coordB + length]);
                 locationsV.forEach(y => {
                     occupied.push([locationsH[0] + 1, y]);
                 })

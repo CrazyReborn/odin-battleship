@@ -1,12 +1,12 @@
 
 const attackComputer = (you, computer) => {
+    const allComputerDivs = document.querySelectorAll('.computer-board > .cell');
     if ((computer.gameboard.allSunk() || you.gameboard.allSunk())) {
-        console.log('done!');
         allComputerDivs.forEach(div => {
             div.removeEventListener('click', attack);
         })
     }
-    const allComputerDivs = document.querySelectorAll('.computer-board > .cell');
+   
     allComputerDivs.forEach(div => {
         div.addEventListener('click', attack);
     })
@@ -30,8 +30,6 @@ const attackComputer = (you, computer) => {
     }
 
 }
-
-
 
 
 const attackPlayer = (computer, player) => {
