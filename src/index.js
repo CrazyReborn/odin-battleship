@@ -7,17 +7,20 @@ import { attackComputer } from "./attack-enemy";
 import { collision } from "./collision";
 
 
+const playerOne = player();
+playerOne.gameboard.place(4, 6, 7);
 const main = (() => {
     renderBoards();
-    const playerOne = player();
+    
     const playerTwo = computer();
-    playerOne.gameboard.place(4, 6, 7);
+    
     playerTwo.placeVerySmallShips();
     playerTwo.placeSmallShips();
     playerTwo.placeMediumShips();
     playerTwo.placeLargeShips();
+    
     renderPlayerShips(playerOne);
-    renderComputerShips(playerTwo);
+    //renderComputerShips(playerTwo);
     attackComputer(playerOne, playerTwo);
 })();
 

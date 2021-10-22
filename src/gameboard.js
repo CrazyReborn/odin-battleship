@@ -48,7 +48,7 @@ const Gameboard = () => {
             if (checkCollision(locationsH, locationsV)) {
                 return 'failed';
             }
-            else if (coordA + length > 9) {
+            else if (coordA + length > 10) {
                 return 'failed';
             } else {
                 ships.push({
@@ -86,7 +86,7 @@ const Gameboard = () => {
             if (checkCollision(locationsH, locationsV)) {
                 return 'failed';
             }
-            else if (coordB + length > 9) {
+            else if (coordB + length > 10) {
                 return 'failed';
             } else {
                 ships.push({
