@@ -6,20 +6,30 @@ const Gameboard = () => {
     let arrangement = 'horizontal';
     const shot = [];
     const missed = [];
-    let occupiedX = [];
-    let occupiedY = [];
+    let occupied = [];     //// array object that has 2 properties x and y;
 
 
-    const checkCollision = (coords, occupied) => {
-        const alreadyOccupied = (element) => occupied.includes(element);
-        return coords.every(alreadyOccupied)
+    const checkCollision = (coordsH, coordsV) => {
+        if (coordsH.length > coordsV.length) {
+            const matches = (x) => (x[0] == coordsH[0] && x[1] == coordsV[0]) || (x[0] == coordsH[-1] && x[1] == coordsV[0]);
+            return occupied.some(matches);
+        }
+        if (coordsH.length < coordsV.length) {
+            const matches = (x) => (x[0] == coordsH[0] && x[1] == coordsV[0]) || (x[0] == coordsH[0] && x[1] == coordsV[-1]);
+            return occupied.some(matches);
+        }
+        if (coordsH.length = coordsV.length) {
+            const matches = (x) => (x[0] == coordsH[0] && x[1] == coordsV[0]);
+            return occupied.some(matches);
+        }
+
     }
 
-    const change = () => {
+    function change() {
         if (arrangement != 'vertical') {
-            arrangement = 'vertical'
+            arrangement = 'vertical';
         } else {
-            arrangement = 'horizontal'
+            arrangement = 'horizontal';
         }
     }
 
@@ -29,44 +39,79 @@ const Gameboard = () => {
             const locationsH = [];
             const locationsV = [];
             const fillCoorditanes = (() => {
-            for(let i = 0;i < newShip.length; i++) {
-                locationsH.push(coordA+i);
+                for (let i = 0; i < newShip.length; i++) {
+                    locationsH.push(coordA + i);
+                }
+                locationsV.push(coordB);
+            })();
+            if (checkCollision(locationsH, locationsV)) {
+                return 'failed';
+            } else {
+                ships.push({
+                    locationsH,
+                    locationsV,
+                    newShip
+                });
+                ///the ship and horiznotal; y == y;
+                occupied.push([coordA - 1, coordB]);
+                occupied.push([coordA + length, coordB])
+                locationsH.forEach(x => {
+                    occupied.push([x, locationsV[0]]);
+                })
+                ///the ship and horiznotal; y == y - 1;
+                occupied.push([coordA - 1, coordB - 1]);
+                occupied.push([coordA + length, coordB - 1])
+                locationsH.forEach(x => {
+                    occupied.push([x, locationsV[0] - 1]);
+                })
+                ///the ship and horizontal offset; y == y + 1
+                occupied.push([coordA - 1, coordB + 1]);
+                occupied.push([coordA + length, coordB + 1])
+                locationsH.forEach(x => {
+                    occupied.push([x, locationsV[0] + 1]);
+                })
+                return 'placed'
             }
-            locationsV.push(coordB);
-        })();
-        if (checkCollision(locationsH, occupiedX) && checkCollision(locationsV, occupiedY)) {
-            return;
-        } else {
-            locationsH.forEach(coord => occupiedX.push(coord));
-            locationsV.forEach(coord => occupiedY.push(coord));
-            ships.push({
-                locationsH,
-                locationsV,
-                newShip});
         }
-    }
         else if (arrangement == 'vertical') {
             const newShip = Ship(length);
             const locationsH = [];
             const locationsV = [];
             const fillCoorditanes = (() => {
-            locationsH.push(coordA);
-            for(let i = 0;i < newShip.length; i++) {
-                locationsV.push(coordB+i);
+                locationsH.push(coordA);
+                for (let i = 0; i < newShip.length; i++) {
+                    locationsV.push(coordB + i);
+                }
+            })();
+            if (checkCollision(locationsH, locationsV)) {
+                return 'failed';
+            } else {
+                ships.push({
+                    locationsH,
+                    locationsV,
+                    newShip
+                });
+                /// x==x
+                occupied.push([coordA, coordB - 1]);
+                occupied.push([coordA, coordB + length]);
+                locationsV.forEach(y => {
+                    occupied.push([locationsH[0], y]);
+                })
+                ///x == x -1
+                occupied.push([coordA - 1, coordB - 1]);
+                occupied.push([coordA - 1, coordB + length]);
+                locationsV.forEach(y => {
+                    occupied.push([locationsH[0] - 1, y]);
+                })
+                ///x == x + 1
+                occupied.push([coordA + 1, coordB - 1]);
+                occupied.push([coordA + 1, coordB + length]);
+                locationsV.forEach(y => {
+                    occupied.push([locationsH[0] + 1, y]);
+                })
             }
-        })();
-        if (checkCollision(locationsH, occupiedX) && checkCollision(locationsV, occupiedY)) {
-            return;
-        } else {
-            locationsH.forEach(coord => occupiedX.push(coord));
-            locationsV.forEach(coord => occupiedY.push(coord));
-        ships.push({
-            locationsH,
-            locationsV,
-            newShip});
         }
     }
-}
 
     const receiveAttack = (coordX, coordY) => {
         let x;
@@ -75,7 +120,7 @@ const Gameboard = () => {
         let hitLocation;
 
         //go over ships and check locationH and locationV for matches
-        const findShip = (ship) => ship.locationsH.includes(coordX) && ship.locationsV.includes(coordY); 
+        const findShip = (ship) => ship.locationsH.includes(coordX) && ship.locationsV.includes(coordY);
         foundShip = ships.find(findShip);
 
         //if not found then push ccords to evaded
@@ -117,10 +162,12 @@ const Gameboard = () => {
         change,
         receiveAttack,
         allSunk,
+        checkCollision,
         shot,
         missed,
-        ships, 
-        arrangement
+        ships,
+        arrangement,
+        occupied
     }
 }
 
