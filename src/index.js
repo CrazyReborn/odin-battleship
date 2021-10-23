@@ -5,22 +5,22 @@ import { computer } from './computer';
 import { Game } from "./game";
 import { attackComputer } from "./attack-enemy";
 import { collision } from "./collision";
-
+import { placing } from "./placing";
 
 const playerOne = player();
-playerOne.gameboard.place(4, 6, 7);
+
 const main = (() => {
     renderBoards();
+    placing(playerOne);
+    // const playerTwo = computer();
     
-    const playerTwo = computer();
+    // playerTwo.placeVerySmallShips();
+    // playerTwo.placeSmallShips();
+    // playerTwo.placeMediumShips();
+    // playerTwo.placeLargeShips();
     
-    playerTwo.placeVerySmallShips();
-    playerTwo.placeSmallShips();
-    playerTwo.placeMediumShips();
-    playerTwo.placeLargeShips();
-    
-    renderPlayerShips(playerOne);
-    //renderComputerShips(playerTwo);
-    attackComputer(playerOne, playerTwo);
+    //renderPlayerShips(playerOne);
+    // //renderComputerShips(playerTwo);
+    // attackComputer(playerOne, playerTwo);
 })();
 

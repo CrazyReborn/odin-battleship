@@ -6,27 +6,27 @@ const attackComputer = (you, computer) => {
             div.removeEventListener('click', attack);
         })
     }
-   
+
     allComputerDivs.forEach(div => {
         div.addEventListener('click', attack);
     })
-    function attack (event) {
+    function attack(event) {
         const x = parseInt(event.target.getAttribute('x'));
-            const y = parseInt(event.target.getAttribute('y'));
-            const result = you.turn(computer, x, y);
-            if (result == 'hit') {
-                event.target.classList.add('hit');
-            } else if (result == 'miss') {
-                event.target.classList.add('miss');
-                attackPlayer(computer, you);
-            }
-            if (computer.gameboard.allSunk() || you.gameboard.allSunk()) {
-                console.log('done!');
-                allComputerDivs.forEach(div => {
-                    div.removeEventListener('click', attack);
-                })
-            }
-            event.target.removeEventListener('click', attack);
+        const y = parseInt(event.target.getAttribute('y'));
+        const result = you.turn(computer, x, y);
+        if (result == 'hit') {
+            event.target.classList.add('hit');
+        } else if (result == 'miss') {
+            event.target.classList.add('miss');
+            attackPlayer(computer, you);
+        }
+        if (computer.gameboard.allSunk() || you.gameboard.allSunk()) {
+            console.log('done!');
+            allComputerDivs.forEach(div => {
+                div.removeEventListener('click', attack);
+            })
+        }
+        event.target.removeEventListener('click', attack);
     }
 
 }
@@ -44,6 +44,6 @@ const attackPlayer = (computer, player) => {
         attackPlayer(computer, player);
     }
     return attackResult[0];
-} 
+}
 
 export { attackComputer, attackPlayer }
