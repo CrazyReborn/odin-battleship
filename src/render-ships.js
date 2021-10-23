@@ -8,6 +8,9 @@ function renderPlayerShips (player) {
         const found = (element) => foundX.includes(parseInt(element.attributes[1].value)) && foundY.includes(parseInt(element.attributes[2].value));
         const filteredCells = allPlayerCells.filter(found);
         filteredCells.forEach(div => div.classList.add('occupied'));
+        if (element.newShip.isSunk()) {
+            filteredCells.forEach(div => div.classList.add('down'));
+        }
     });
 };
 
@@ -21,7 +24,9 @@ function renderComputerShips (computer) {
         const foundY = element.locationsV;
         const found = (element) => foundX.includes(parseInt(element.attributes[1].value)) && foundY.includes(parseInt(element.attributes[2].value));
         const filteredCells = allComputerCells.filter(found);
-        filteredCells.forEach(div => div.classList.add('occupied'));
+        if (element.newShip.isSunk()) {
+            filteredCells.forEach(div => div.classList.add('down'));
+        }
     });
 };
 

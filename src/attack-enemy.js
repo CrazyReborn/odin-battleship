@@ -1,3 +1,4 @@
+import { renderComputerShips } from "./render-ships";
 
 const attackComputer = (you, computer) => {
     const allComputerDivs = document.querySelectorAll('.computer-board > .cell');
@@ -21,11 +22,11 @@ const attackComputer = (you, computer) => {
             attackPlayer(computer, you);
         }
         if (computer.gameboard.allSunk() || you.gameboard.allSunk()) {
-            console.log('done!');
             allComputerDivs.forEach(div => {
                 div.removeEventListener('click', attack);
             })
         }
+        renderComputerShips(computer);
         event.target.removeEventListener('click', attack);
     }
 
