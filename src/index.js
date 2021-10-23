@@ -13,6 +13,7 @@ const main = (() => {
     playerTwo.placeSmallShips();
     playerTwo.placeMediumShips();
     playerTwo.placeLargeShips();
+    document.querySelector('input[name="length"]').checked = true;
     placing(playerOne, playerTwo);
 
     if (playerOne.gameboard.allSunk() && !playerOne.gameboard.ships[0].newShip.isSunk()) {
