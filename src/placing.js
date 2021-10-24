@@ -81,6 +81,7 @@ const placing = (playerOne, playerTwo) => {
     const allPlayerCells = document.querySelectorAll('.player-board > .cell');
     allPlayerCells.forEach(cell => {
         cell.addEventListener('click', place);
+        disp.updatePlacing(verySmallShips, smallShips, mediumShips, largeShips);
     })
 }
 
