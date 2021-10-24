@@ -4,18 +4,20 @@ const computer = () => {
     const gameboard = Gameboard();
 
     const turn = (enemy) => {
+        if (!enemy.gameboard.allSunk()) {
+            let hitX = Math.floor(Math.random() * 10);
+            let hitY = Math.floor(Math.random() * 10);
 
-        let hitX = Math.floor(Math.random() * 10);
-        let hitY = Math.floor(Math.random() * 10);
+            const include = (element) => element[0] == hitX && element[1] == hitY;
+            while (enemy.gameboard.shot.some(include)) {
+                hitX = Math.floor(Math.random() * 10);
+                hitY = Math.floor(Math.random() * 10);
+            }
+            const result = enemy.gameboard.receiveAttack(hitX, hitY);
+            const hits = [result, hitX, hitY];
+            return hits;
+        }
 
-       const include = (element) => element[0]==hitX && element[1] == hitY;
-       while (enemy.gameboard.shot.some(include)) {
-        hitX = Math.floor(Math.random() * 10);
-        hitY = Math.floor(Math.random() * 10);
-       }
-        const result = enemy.gameboard.receiveAttack(hitX, hitY);
-        const hits = [result, hitX, hitY];
-        return hits;
     }
 
 
@@ -26,8 +28,8 @@ const computer = () => {
             let y = Math.floor(Math.random() * 10);
             let result = gameboard.place(1, x, y);
             if (result == 'failed') continue;
-            i++; 
-        } while(i<4)
+            i++;
+        } while (i < 4)
     }
 
     const placeSmallShips = () => {
@@ -40,8 +42,8 @@ const computer = () => {
                 gameboard.change();
                 continue
             };
-            i++; 
-        } while(i<3)
+            i++;
+        } while (i < 3)
     }
 
     const placeMediumShips = () => {
@@ -51,8 +53,8 @@ const computer = () => {
             let y = Math.floor(Math.random() * 10);
             let result = gameboard.place(3, x, y);
             if (result == 'failed') continue;
-            i++; 
-        } while(i<2)
+            i++;
+        } while (i < 2)
     }
 
     const placeLargeShips = () => {
@@ -63,9 +65,10 @@ const computer = () => {
             let result = gameboard.place(4, x, y);
             if (result == 'failed') {
                 gameboard.change();
-                continue};
+                continue
+            };
             i++;
-        } while(i!=1)
+        } while (i != 1)
     }
 
     return {

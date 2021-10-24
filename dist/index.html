@@ -17,7 +17,8 @@
             #main {
                 display: flex;
                 flex-direction: row;
-                justify-content: space-around;
+                justify-content: space-between;
+                padding: 5%;
             }
 
             .player-board {
@@ -41,22 +42,23 @@
             div.hit.down {
                 background-color: coral;
             }
+
         </style>
     </head>
     <body>
         <div id='main'>
             <div class="player-board">
             </div>
+            <div class="display">
+            </div>
             <div class="computer-board">
             </div>
         </div>
         <div id="ship-selector-container">
-            <div id="arragment">
-                <p>Arragment</p>
-                <input type="radio" name="arragment" id="horizontal" value="horizontal">
-                <label for="horizontal">Horizontal</label>
-                <input type="radio" name="arragment" id="vertical" value="vertical">
-                <label for="vertical">Horizontal</label>
+            <div id="arrangament">
+                <p>Arrangement</p>
+                <p id="arrangement"></p>
+                <button id="change-arrangement">Click to change arrangement</button>
             </div>
             <div id="ship-size">
                 <p>Length</p>

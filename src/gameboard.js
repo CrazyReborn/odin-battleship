@@ -29,8 +29,10 @@ const Gameboard = () => {
     function change() {
         if (arrangement != 'vertical') {
             arrangement = 'vertical';
+            return 'vertical';
         } else {
             arrangement = 'horizontal';
+            return 'horizontal';
         }
     }
 
@@ -73,6 +75,7 @@ const Gameboard = () => {
                 return 'placed'
             }
         }
+
         else if (arrangement == 'vertical') {
             const newShip = Ship(length);
             const locationsH = [];
@@ -108,6 +111,7 @@ const Gameboard = () => {
                 locationsV.forEach(y => {
                     occupied.push([locationsH[0] + 1, y]);
                 })
+                return 'placed';
             }
         }
     }
@@ -148,11 +152,11 @@ const Gameboard = () => {
 
     const allSunk = () => {
         const allShipSunk = (ship) => ship.newShip.isSunk();
-        if (!ships.every(allShipSunk)) {
-            return false;
+        if (ships.every(allShipSunk) && ships[0]) {
+            return true;
         }
         else {
-            return true;
+            return false;
         }
     }
 
