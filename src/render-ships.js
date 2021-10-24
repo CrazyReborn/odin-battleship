@@ -24,7 +24,7 @@ function renderComputerShips (computer) {
         const foundY = element.locationsV;
         const found = (element) => foundX.includes(parseInt(element.attributes[1].value)) && foundY.includes(parseInt(element.attributes[2].value));
         const filteredCells = allComputerCells.filter(found);
-        filteredCells.forEach(div => div.classList.add('occupied'));
+      //  filteredCells.forEach(div => div.classList.add('occupied'));      UNCOMMENT TO SEE COMPUTER's SHIPS
         if (element.newShip.isSunk()) {
             filteredCells.forEach(div => div.classList.add('down'));
         }
