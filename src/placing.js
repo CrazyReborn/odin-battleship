@@ -1,5 +1,7 @@
 import { renderPlayerShips } from "./render-ships";
 import { attackComputer } from "./attack-enemy";
+import { display } from "./display";
+
 
 const placing = (playerOne, playerTwo) => {
     
@@ -11,6 +13,7 @@ const placing = (playerOne, playerTwo) => {
         })
     })
 
+    const disp = display();
 
     let verySmallShips = 0;
     let smallShips = 0;
@@ -26,6 +29,7 @@ const placing = (playerOne, playerTwo) => {
             if (result == 'placed') {
                 verySmallShips++;
                 event.target.removeEventListener('click', place);
+                disp.updatePlacing(verySmallShips, smallShips, mediumShips, largeShips);
             }
             else {
                 return;
@@ -36,6 +40,7 @@ const placing = (playerOne, playerTwo) => {
             if (result == 'placed') {
                 smallShips++;
                 event.target.removeEventListener('click', place);
+                disp.updatePlacing(verySmallShips, smallShips, mediumShips, largeShips);
             }
             else {
                 return;
@@ -46,6 +51,7 @@ const placing = (playerOne, playerTwo) => {
             if (result == 'placed') {
                 mediumShips++;
                 event.target.removeEventListener('click', place);
+                disp.updatePlacing(verySmallShips, smallShips, mediumShips, largeShips);
             }
             else {
                 return;
@@ -56,6 +62,7 @@ const placing = (playerOne, playerTwo) => {
             if (result == 'placed') {
                 largeShips++;
                 event.target.removeEventListener('click', place);
+                disp.updatePlacing(verySmallShips, smallShips, mediumShips, largeShips);
             }
             else {
                 return;

@@ -9,7 +9,6 @@ const playerTwo = computer();
 
 const main = (() => {
     renderBoards();
-
     playerTwo.placeVerySmallShips();
     playerTwo.placeSmallShips();
     playerTwo.placeMediumShips();
@@ -17,5 +16,5 @@ const main = (() => {
     renderComputerShips(playerTwo);
     document.querySelector('input[name="length"]').checked = true;
     placing(playerOne, playerTwo);
-    changeArrangament(playerOne)
+    changeArrangament(playerOne);
 })();

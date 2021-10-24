@@ -21,16 +21,32 @@ const attackComputer = (you, computer) => {
             event.target.classList.add('miss');
             attackPlayer(computer, you);
         }
-        if (computer.gameboard.allSunk() || you.gameboard.allSunk()) {
+
+        if (you.gameboard.allSunk() && you.gameboard.ships[0].newShip.isSunk()) {
+            console.log('computer won');    ///SHOW ON DISPLAY
             allComputerDivs.forEach(div => {
                 div.removeEventListener('click', attack);
             })
         }
+        else if (computer.gameboard.allSunk() && computer.gameboard.ships[0].newShip.isSunk()) {
+            console.log('player won'); ///SHOW ON DISPLAY  DID NOT TEST YET
+            allComputerDivs.forEach(div => {
+                div.removeEventListener('click', attack);
+            })
+        }
+
+        // if (computer.gameboard.allSunk() || you.gameboard.allSunk()) {
+        //     allComputerDivs.forEach(div => {
+        //         div.removeEventListener('click', attack);
+        //     })
+        // }
         renderComputerShips(computer);
         event.target.removeEventListener('click', attack);
     }
 
 }
+
+
 
 
 const attackPlayer = (computer, player) => {
