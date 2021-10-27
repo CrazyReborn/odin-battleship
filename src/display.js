@@ -4,6 +4,7 @@ const display = () => {
     const clear = () => {
         display.innerHTML = '';
     }
+
     const updatePlacing = (vs, s, m, l) => {
         display.innerHTML = `<p>1 cell ships placed: ${vs}<p><br>` +
                             `<p>2 cells ships placed: ${s}<p><br>` +
@@ -11,9 +12,17 @@ const display = () => {
                             `<p>4 cell ships placed: ${l}<p><br>`;
 
     }
+
+    const playerWon = () => {
+        display.innerHTML = '<p>PLAYER WON!</p>'
+    }
+    
+    const computerWon = () => {
+        display.innerHTML = '<p>COMPUTER WON!</p>'
+    }
     return {
-        updatePlacing,
-        clear
+        clear, updatePlacing,
+        playerWon, computerWon
     }
 }
 

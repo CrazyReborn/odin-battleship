@@ -70,6 +70,7 @@ const placing = (playerOne, playerTwo) => {
         }
         if (verySmallShips == 4 && smallShips == 3 &&
             mediumShips == 2 && largeShips == 1) {
+            disp.clear();
             allPlayerCells.forEach(cell => {
                 cell.removeEventListener('click', place);
             })

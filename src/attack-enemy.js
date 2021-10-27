@@ -1,6 +1,10 @@
 import { renderComputerShips } from "./render-ships";
+import { display } from "./display";
 
 const attackComputer = (you, computer) => {
+
+    const displ = display();
+
     const allComputerDivs = document.querySelectorAll('.computer-board > .cell');
     if ((computer.gameboard.allSunk() || you.gameboard.allSunk())) {
         allComputerDivs.forEach(div => {
@@ -23,13 +27,15 @@ const attackComputer = (you, computer) => {
         }
 
         if (you.gameboard.allSunk() && you.gameboard.ships[0].newShip.isSunk()) {
-            console.log('computer won');    ///SHOW ON DISPLAY
+            displ.clear();
+            displ.computerWon();  ///SHOW ON DISPLAY
             allComputerDivs.forEach(div => {
                 div.removeEventListener('click', attack);
             })
         }
         else if (computer.gameboard.allSunk() && computer.gameboard.ships[0].newShip.isSunk()) {
-            console.log('player won'); ///SHOW ON DISPLAY  DID NOT TEST YET
+            displ.clear();
+            displ.playerWon(); ///SHOW ON DISPLAY  DID NOT TEST YET
             allComputerDivs.forEach(div => {
                 div.removeEventListener('click', attack);
             })
