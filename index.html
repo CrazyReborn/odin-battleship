@@ -4,6 +4,7 @@
         <script src="./main.js" defer></script>
         <meta charsheet="UTF-8">
         <style>
+            
             .cell.hit {
                 background-color: brown;
             }
@@ -14,11 +15,19 @@
                 background-color: blue;
             }
 
+            .valid {
+                background-color: green;
+            }
+
+            .invalid {
+                background-color: red;
+            }
+
             #main {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-                padding: 5%;
+                padding: 0%;
             }
 
             .player-board {
@@ -47,6 +56,16 @@
                 font-size: 150%;
             }
 
+            .vs {
+                height: 50px;
+                width: 50px;
+                background-color: blue;
+            }
+            .ships {
+                display: flex;
+                gap: 5px;
+                flex-direction: row;
+            }
         </style>
     </head>
     <body>
@@ -75,6 +94,9 @@
                 <input type="radio" name="length" id="large" value="4">
                 <label for="large">Large (4 cells)</label>
             </div>
+        </div>
+        <div class='ships'>
+            <div class="vs" length='1' draggable="true"></div>
         </div>
     </body>
 </html>
