@@ -4,7 +4,7 @@
         <script src="./main.js" defer></script>
         <meta charsheet="UTF-8">
         <style>
-            
+
             .cell.hit {
                 background-color: brown;
             }
@@ -64,8 +64,48 @@
             .ships {
                 display: flex;
                 gap: 5px;
+                flex-direction: column;
+                width: max-content;
+            }
+
+            .s {
+                display: flex;
+                gap: 5px;
                 flex-direction: row;
             }
+
+            .m {
+                display: flex;
+                gap: 5px;
+                flex-direction: row;
+            }
+
+            .l {
+                display: flex;
+                gap: 5px;
+                flex-direction: row;
+            }
+
+            .s > div {
+                height: 50px;
+                width: 50px;
+                background-color: blue;
+            }
+
+            .m > div {
+                height: 50px;
+                width: 50px;
+                background-color: blue;
+            }
+
+            .l > div {
+                height: 50px;
+                width: 50px;
+                background-color: blue;
+            }
+
+
+
         </style>
     </head>
     <body>
@@ -97,6 +137,21 @@
         </div>
         <div class='ships'>
             <div class="vs" length='1' draggable="true"></div>
+            <div class="s" length='2' draggable="true">
+                <div></div>
+                <div></div>
+            </div>
+            <div class="m" length='3' draggable="true">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="l" length='4' draggable="true">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
     </body>
 </html>

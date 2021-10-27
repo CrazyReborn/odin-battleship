@@ -10,7 +10,6 @@ const playerTwo = computer();
 
 const main = (() => {
     renderBoards();
-    playerOne.gameboard.place(4, 3, 3);
     renderPlayerShips(playerOne);
     dnd(playerOne);
     // playerTwo.placeVerySmallShips();
