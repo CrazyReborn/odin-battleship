@@ -1,7 +1,11 @@
-import { renderPlayerShips } from './render-ships'
+import { renderPlayerShips } from './render-ships';
+import { attackComputer } from './attack-enemy';
 
-function dnd(player) {
+function dnd(player, computer) {
     const allPlayerCells = Array.from(document.querySelectorAll('.player-board > .cell'));
+    const arrangament = document.querySelector('#arrangement');
+    arrangament.textContent = 'horizontal';
+
     const vsShip = document.querySelector('.vs');
     const sShip = document.querySelector('.s');
     const mShip = document.querySelector('.m');
@@ -28,63 +32,20 @@ function dnd(player) {
         outLength = parseInt(this.getAttribute('length'));
     }
 
-    // function dragEnter(e) {
-    //     const x = Array.from(this.getAttribute('x')).map(x => parseInt(x));
-    //     const y = Array.from(this.getAttribute('y')).map(y => parseInt(y));
-    //     if (outLength > 1) {
-    //         for (let i = 1; i < outLength; i++) {
-    //             x.push(x[0] + i);
-    //         }
-    //     }
-    //     const result = player.gameboard.checkCollision(x, y);
-    //     if (x.length > y.length) { //IF HORIZONTAL
-    //         if (result == false) {
-    //             x.forEach(x => {
-    //                 const div = document.querySelector(`.player-board > div[x="${x}"][y="${y[0]}"]`);
-    //                 div.classList.add('valid');
-    //             })
-    //         }
-    //         else {
-    //             x.forEach(x => {
-    //                 const div = document.querySelector(`.player-board > div[x="${x}"][y="${y[0]}"]`);
-    //                 div.classList.add('invalid');
-    //             })
-    //         }
-    //     }
-    //     else if (x.length < y.length) { //IF VERTICAL
-    //         if (result == false) {
-    //             y.forEach(y => {
-    //                 const div = document.querySelector(`.player-board > div[x="${x[0]}"][y="${y}"]`);
-    //                 div.classList.add('valid');
-    //             })
-    //         }
-    //         else {
-    //             y.forEach(y => {
-    //                 const div = document.querySelector(`.player-board > div[x="${x[0]}"][y="${y}"]`);
-    //                 div.classList.add('invalid');
-    //             })
-    //         }
-    //     }
-    //     else {
-    //         if (result == false) {
-    //             this.classList.add('valid');
-    //         }
-    //         else {
-    //             this.classList.add('invalid');
-    //         }
-    //     }
-
-    //     e.preventDefault();
-    // };
-
-
     function dragOver(e) {
         const x = Array.from(this.getAttribute('x')).map(x => parseInt(x));
         const y = Array.from(this.getAttribute('y')).map(y => parseInt(y));
         if (outLength > 1) {
-            for (let i = 1; i < outLength; i++) {
-                x.push(x[0] + i);
+            if (arrangament.textContent == 'horizontal') {
+                for (let i = 1; i < outLength; i++) {
+                    x.push(x[0] + i);
+                }
+            } else if (arrangament.textContent == 'vertical') {
+                for (let i = 1; i < outLength; i++) {
+                    y.push(y[0] + i);
+                }
             }
+            
         }
         const result = player.gameboard.checkCollision(x, y);
         if (x.length > y.length) { //IF HORIZONTAL
@@ -132,8 +93,14 @@ function dnd(player) {
         const x = Array.from(this.getAttribute('x')).map(x => parseInt(x));
         const y = Array.from(this.getAttribute('y')).map(y => parseInt(y));
         if (outLength > 1) {
-            for (let i = 1; i < outLength; i++) {
-                x.push(x[0] + i);
+            if (arrangament.textContent == 'horizontal') {
+                for (let i = 1; i < outLength; i++) {
+                    x.push(x[0] + i);
+                }
+            } else if (arrangament.textContent == 'vertical') {
+                for (let i = 1; i < outLength; i++) {
+                    y.push(y[0] + i);
+                }
             }
         }
         if (x.length > y.length) {
@@ -191,11 +158,11 @@ function drop(e) {
         div.classList.remove('valid', 'invalid');
     });
     renderPlayerShips(player);
+    if (verysmallShips == 4 && smallShips == 3 &&
+        mediumShips == 2 && largeShips == 1) {
+            attackComputer(player,computer);
+        }
 }
-
-// allPlayerCells.forEach(element => {
-//     element.addEventListener('dragenter', dragEnter)
-// });
 
 allPlayerCells.forEach(element => {
     element.addEventListener('dragleave', dragLeave)

@@ -10,14 +10,16 @@ const playerTwo = computer();
 
 const main = (() => {
     renderBoards();
-    renderPlayerShips(playerOne);
-    dnd(playerOne);
-    // playerTwo.placeVerySmallShips();
-    // playerTwo.placeSmallShips();
-    // playerTwo.placeMediumShips();
-    // playerTwo.placeLargeShips();
-    // renderComputerShips(playerTwo);
-    // document.querySelector('input[name="length"]').checked = true;
-    // placing(playerOne, playerTwo);
-    // changeArrangament(playerOne);
+    changeArrangament(playerOne);
+    playerTwo.placeVerySmallShips();
+    playerTwo.placeSmallShips();
+    playerTwo.placeMediumShips();
+    playerTwo.placeLargeShips();
+
+    //commentout to enable classic placing
+    dnd(playerOne, playerTwo);
+    //Uncoment to enable classic placing
+   // document.querySelector('input[name="length"]').checked = true;
+   // placing(playerOne, playerTwo);
+   
 })();

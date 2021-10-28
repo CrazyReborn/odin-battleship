@@ -90,9 +90,32 @@ const placing = (playerOne, playerTwo) => {
 const changeArrangament = (playerOne) => {
     const arrBtn = document.querySelector('#change-arrangement');
     const arrStatus = document.querySelector('#arrangement');
+    const ships = document.querySelector('.ships');
+    const vs = document.querySelector('.vs');
+    const s = document.querySelector('.s');
+    const m = document.querySelector('.m');
+    const l = document.querySelector('.l');
+
+
     arrStatus.textContent = playerOne.gameboard.arrangament
     arrBtn.addEventListener('click', () => {
-        arrStatus.textContent = playerOne.gameboard.change();
+        const changeValue = playerOne.gameboard.change();
+        arrStatus.textContent = changeValue;
+        if (changeValue == 'horizontal') {
+            ships.style.flexDirection = 'column';
+            vs.style.flexDirection = 'row';
+            s.style.flexDirection = 'row';
+            m.style.flexDirection = 'row';
+            l.style.flexDirection = 'row';
+        }
+        else if (changeValue == 'vertical') {
+            ships.style.flexDirection = 'row';
+            vs.style.flexDirection = 'column';
+            s.style.flexDirection = 'column';
+            m.style.flexDirection = 'column';
+            l.style.flexDirection = 'column';
+        }
+        
     })
 }
 
