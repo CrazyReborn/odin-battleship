@@ -66,24 +66,31 @@
                 gap: 5px;
                 flex-direction: column;
                 width: max-content;
+                height: max-content;
             }
 
             .s {
                 display: flex;
                 gap: 5px;
                 flex-direction: row;
+                width: max-content;
+                height: max-content;
             }
 
             .m {
                 display: flex;
                 gap: 5px;
                 flex-direction: row;
+                width: max-content;
+                height: max-content;
             }
 
             .l {
                 display: flex;
                 gap: 5px;
                 flex-direction: row;
+                width: max-content;
+                height: max-content;
             }
 
             .s > div {
@@ -120,10 +127,11 @@
         <div id="ship-selector-container">
             <div id="arrangament">
                 <p>Arrangement</p>
-                <p id="arrangement"></p>
+                <p id="arrangement">horizontal</p>
                 <button id="change-arrangement">Click to change arrangement</button>
             </div>
-            <div id="ship-size">
+            <!--Uncomment this and in index.js to enable classic placing-->
+            <!-- <div id="ship-size">
                 <p>Length</p>
                 <input type="radio" name="length" id="very-small" value="1">
                 <label for="very-small">Very Small (1 cell)</label>
@@ -133,7 +141,7 @@
                 <label for="medium">Medium (3 cells)</label>
                 <input type="radio" name="length" id="large" value="4">
                 <label for="large">Large (4 cells)</label>
-            </div>
+            </div> -->
         </div>
         <div class='ships'>
             <div class="vs" length='1' draggable="true"></div>
