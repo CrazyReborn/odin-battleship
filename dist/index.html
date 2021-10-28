@@ -6,27 +6,28 @@
         <style>
 
             .cell.hit {
-                background-color: brown;
+                background-color: #FF5DA2;
             }
             .cell.miss{
                 background-color: darkkhaki;
             }
-            .occupied {
-                background-color: blue;
+            .cell.occupied {
+                background-color: #9C19E0;
             }
 
-            .valid {
-                background-color: green;
+            .cell.valid {
+                background-color: #99DDCC;
             }
 
-            .invalid {
-                background-color: red;
+            .cell.invalid {
+                background-color: #FF5DA2;
             }
 
             #main {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
+                margin: 2%;
                 padding: 0%;
             }
 
@@ -46,10 +47,11 @@
 
             div.cell {
                 border: 1px solid black;
+                background-color: #d1d1ff;
             }
 
             div.hit.down {
-                background-color: coral;
+                background-color: red;
             }
 
             .display {
@@ -59,12 +61,13 @@
             .vs {
                 height: 50px;
                 width: 50px;
-                background-color: blue;
+                background-color: #9C19E0;
             }
             .ships {
                 display: flex;
                 gap: 5px;
                 flex-direction: column;
+                margin: 2%;
                 width: max-content;
                 height: max-content;
             }
@@ -96,21 +99,23 @@
             .s > div {
                 height: 50px;
                 width: 50px;
-                background-color: blue;
+                background-color: #9C19E0;
             }
 
             .m > div {
                 height: 50px;
                 width: 50px;
-                background-color: blue;
+                background-color: #9C19E0;
             }
 
             .l > div {
                 height: 50px;
                 width: 50px;
-                background-color: blue;
+                background-color: #9C19E0;
             }
-
+            #ship-selector-container {
+                margin: 2%;
+            }
 
 
         </style>

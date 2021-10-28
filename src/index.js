@@ -11,13 +11,14 @@ const playerTwo = computer();
 const main = (() => {
     renderBoards();
     changeArrangament(playerOne);
+    dnd(playerOne, playerTwo);
     playerTwo.placeVerySmallShips();
     playerTwo.placeSmallShips();
     playerTwo.placeMediumShips();
     playerTwo.placeLargeShips();
 
     //commentout to enable classic placing
-    dnd(playerOne, playerTwo);
+    
     //Uncoment to enable classic placing
    // document.querySelector('input[name="length"]').checked = true;
    // placing(playerOne, playerTwo);
