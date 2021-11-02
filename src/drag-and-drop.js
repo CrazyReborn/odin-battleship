@@ -1,10 +1,14 @@
 import { renderPlayerShips } from './render-ships';
 import { attackComputer } from './attack-enemy';
+import { display } from './display';
 
 function dnd(player, computer) {
     const allPlayerCells = Array.from(document.querySelectorAll('.player-board > .cell'));
     const arrangament = document.querySelector('#arrangement');
     arrangament.textContent = 'horizontal';
+
+    const displ = display();
+    displ.start();
 
     const vsShip = document.querySelector('.vs');
     const sShip = document.querySelector('.s');
@@ -130,29 +134,41 @@ function drop(e) {
     if (result == false && length == 1 && verysmallShips < 4) {
         player.gameboard.place(1, x, y);
         verysmallShips++;
+        displ.updatePlacing(verysmallShips, smallShips, mediumShips, largeShips);
     } else if (length == 1 && verysmallShips == 4) {
-        console.log(`cant't place more than 4   very small ships!`);  //MAKE IT APPEAR ON DISPLAY
+        displ.noMoreShips();
+        setTimeout(() => displ.updatePlacing(verysmallShips, smallShips, mediumShips, largeShips),
+        2000);
     }
     //for 2 cell ships
     else if (result == false && length == 2 && smallShips < 3) {
         player.gameboard.place(2, x, y);
         smallShips++;
+        displ.updatePlacing(verysmallShips, smallShips, mediumShips, largeShips);
     } else if (length == 2 && smallShips == 3) {
-        console.log(`cant't place more than 3 small ships!`);  //MAKE IT APPEAR ON DISPLAY
+        displ.noMoreShips();
+        setTimeout(() => displ.updatePlacing(verysmallShips, smallShips, mediumShips, largeShips),
+        2000);
     }
     //for 3 cell ships 
     else if (result == false && length == 3 && mediumShips < 2) {
         player.gameboard.place(3, x, y);
         mediumShips++;
+        displ.updatePlacing(verysmallShips, smallShips, mediumShips, largeShips);
     } else if (length == 2 && mediumShips == 2) {
-        console.log(`cant't place more than 2 medium ships!`);  //MAKE IT APPEAR ON DISPLAY
+        displ.noMoreShips();
+        setTimeout(() => displ.updatePlacing(verysmallShips, smallShips, mediumShips, largeShips),
+        2000);
     }
     //4 cell ship
     else if (result == false && length == 4 && largeShips < 1) {
         player.gameboard.place(4, x, y);
         largeShips++;
+        displ.updatePlacing(verysmallShips, smallShips, mediumShips, largeShips);
     } else if (length == 2 && mediumShips == 2) {
-        console.log(`cant't place more than 1 large ships!`);  //MAKE IT APPEAR ON DISPLAY
+        displ.noMoreShips();
+        setTimeout(() => displ.updatePlacing(verysmallShips, smallShips, mediumShips, largeShips),
+        2000);
     }
     allPlayerCells.forEach(div => {
         div.classList.remove('valid', 'invalid');
@@ -160,6 +176,7 @@ function drop(e) {
     renderPlayerShips(player);
     if (verysmallShips == 4 && smallShips == 3 &&
         mediumShips == 2 && largeShips == 1) {
+            displ.clear();
             attackComputer(player,computer);
         }
 }

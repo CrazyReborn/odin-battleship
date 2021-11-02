@@ -13,16 +13,47 @@ const display = () => {
 
     }
 
+    const start = () => {
+        display.innerHTML = `<p>IT IS BATTLESHIP.</p><p>LEFT BOARD BELONGS TO YOU.</p>
+                             <p>YOU CAN PLACE SHIPS(PUPRLE)</p>
+                             <p>BY DRAGING THEM ON YOUR BOARD.</p>
+                             <p>WHEN THE LAST SHIP WILL BE PLACED 
+                             <p>THE GAME WILL START AUTOMATICALLY.</p>
+                             <p>GOOD LUCK!</p>`
+    }
     const playerWon = () => {
-        display.innerHTML = '<p>PLAYER WON!</p>'
+        display.innerHTML = '<p>PLAYER WON!</p>';
     }
-    
+    const playerHit = () => {
+        display.innerHTML = '<p>YOU HIT THE ENEMY.</p><p>YOU CAN MAKE ANOTHER TURN!</p>';
+    }
+    const computersTurn = () => {
+        display.innerHTML = `<p>YOU MISEED THE ENEMY.</p><p>IT IS COMPUTER'S TURN</p>`
+    }
+    const computerMiss = () => {
+        display.innerHTML = `<p>COMPUTER MISSED.</p><p>IT IS NOW YOUR TURN</p>`
+    }
+    const computerHit = () => {
+        display.innerHTML = `<p>COMPUTER HIT YOU.</p><p>IT WILL MAKE ANOTHER TURN</p>`
+    }
     const computerWon = () => {
-        display.innerHTML = '<p>COMPUTER WON!</p>'
+        display.innerHTML = '<p>COMPUTER WON!</p>';
     }
+    const noMoreShips = () => {
+        display.innerHTML = '<p>YOU CAN\'T PLACE MORE OF THOSE SHIPS</p>';
+    }
+
     return {
-        clear, updatePlacing,
-        playerWon, computerWon
+        clear,
+        updatePlacing,
+        start,
+        playerWon,
+        computerWon,
+        playerHit,
+        computersTurn,
+        computerMiss,
+        noMoreShips,
+        computerHit,
     }
 }
 

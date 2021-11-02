@@ -21,9 +21,11 @@ const attackComputer = (you, computer) => {
         const result = you.turn(computer, x, y);
         if (result == 'hit') {
             event.target.classList.add('hit');
+            displ.playerHit();
         } else if (result == 'miss') {
             event.target.classList.add('miss');
-            attackPlayer(computer, you);
+            displ.computersTurn();
+            setTimeout(() => attackPlayer(computer, you), 500);
         }
 
         if (you.gameboard.allSunk() && you.gameboard.ships[0].newShip.isSunk()) {
@@ -57,14 +59,17 @@ const attackComputer = (you, computer) => {
 
 const attackPlayer = (computer, player) => {
     const allPlayerCells = Array.from(document.querySelectorAll('.player-board > .cell'));
+    const displ = display();
     let attackResult = computer.turn(player);
     const toFind = (element) => element.attributes[1].value == attackResult[1] && element.attributes[2].value == attackResult[2];
     const found = allPlayerCells.find(toFind);
     if (attackResult[0] == 'miss') {
         found.classList.add('miss')
+        displ.computerMiss();
     } else if (attackResult[0] == 'hit') {
         found.classList.add('hit');
-        attackPlayer(computer, player);
+        displ.computerHit();
+        setTimeout(() => attackPlayer(computer, player), 500);
     }
     return attackResult[0];
 }
