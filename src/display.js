@@ -14,7 +14,7 @@ const display = () => {
     }
 
     const start = () => {
-        display.innerHTML = `<p>IT IS BATTLESHIP.</p><p>LEFT BOARD BELONGS TO YOU.</p>
+        display.innerHTML = `<p>THIS IS BATTLESHIP.</p><p>LEFT BOARD BELONGS TO YOU.</p>
                              <p>YOU CAN PLACE SHIPS(PUPRLE)</p>
                              <p>BY DRAGING THEM ON YOUR BOARD.</p>
                              <p>WHEN THE LAST SHIP WILL BE PLACED 
